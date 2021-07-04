@@ -168,7 +168,6 @@
           }
         })
         merge(cached.files, result)
-
         return cached.files
       },
       selectedFileList () {
@@ -184,6 +183,11 @@
     destroyed () {
       window.removeEventListener('resize', this.handleAppResize)
       cached.files = []
+    },
+    watch: {
+      gid () {
+        cached.files = []
+      }
     },
     methods: {
       handleClose (done) {
@@ -285,12 +289,14 @@
 
 <style lang="scss">
 .task-detail-drawer {
+  min-width: 478px;
   .el-drawer__header {
     padding-top: 2rem;
     margin-bottom: 0;
   }
   .el-drawer__body {
     position: relative;
+    overflow: hidden;
   }
   .task-detail-actions {
     position: sticky;
